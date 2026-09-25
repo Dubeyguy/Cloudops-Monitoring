@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from app.config import APP_VERSION, ENVIRONMENT
 
 app = FastAPI()
 
@@ -7,7 +8,12 @@ def root():
     return {
         "application" : "Cloudops Monitoring Platform",
         "status" : "healthy",
-        "environment" : "Local",
-        "version" : "1.0.0"
+        "environment" : ENVIRONMENT,
+        "version" : APP_VERSION
     }
 
+@app.get("/health")
+def health():
+    return {
+        "status" : "healthy"
+    }
